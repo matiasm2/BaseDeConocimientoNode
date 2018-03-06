@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/materialize.min.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  body
+    <nav>
+    <div class="nav-wrapper light-blue darken-4">
+    <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
+    block nav
+    </div>
+    </nav>
+    div(class="container")
+      block content
+    
+    script(src='/javascripts/jquery-3.3.1.min.js')
+    script(src='/javascripts/materialize.min.js')
+    block script
