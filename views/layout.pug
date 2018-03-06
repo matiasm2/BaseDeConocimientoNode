@@ -8,7 +8,18 @@ html
     <nav>
     <div class="nav-wrapper light-blue darken-4">
     <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
-    block nav
+    if sessionToken
+      <ul class="right hide-on-med-and-down">
+      <li><a href="/create?st=#{sessionToken}">Crear Registro</a></li>
+      <li><a href="/search?st=#{sessionToken}">Buscar Registro</a></li>
+      <li><a  href="/logout?st=#{sessionToken}" class="light-blue accent-4 waves-effect waves-light btn" id="bt-logout">Exit</a></li>
+      </ul>
+      <ul class="left hide-on-large-only">
+        <li><a href="javascript:void(0)" id="bt-menu"><i class="material-icons">menu</i></a></li>
+      </ul>
+      <ul class="right hide-on-large-only">
+      <li><a href="javascript:void(0)" id="bt-mov-logout"><i class="material-icons">exit_to_app</i></a></li>
+      </ul>
     </div>
     </nav>
     div(class="container")
