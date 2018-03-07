@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
     }
     headers = rest.headersWAuth(req.query.st);
     response = rest.restAPICall(headers, 'POST', 'http://10.100.107.90/api/core/security/logout', body);
-    res.render('login', { title: 'Login - Base de Conocimiento' });
+    console.log(response);
+    res.render('login', { title: 'Login - Base de Conocimiento', login: false });
 });
 
 module.exports = router;
