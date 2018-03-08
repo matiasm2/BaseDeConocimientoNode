@@ -1,0 +1,120 @@
+extends layout
+
+block content
+  <div id= "c-detalle" class="card light-blue darken-4">
+  <div class="card-content white-text">
+  <a class="right white-text" href="javascript:void(0)" id="bt-del"><i class="material-icons">delete</i></a>
+  <a class="right white-text" href="javascript:void(0)" id= "bt-edit"><i class="material-icons">edit</i></a>
+  <span class="card-title" id="sp-titulo">#{reg.tit}</span>
+  <p id="sp-fab">Fabricante: #{reg.fab}</p>
+  <p id="sp-tec">Tecnología: #{reg.tec}</p>
+  <p id="p-modelo">Modelo: #{reg.mod}</p>
+  <div id="buttons">
+  </div>
+  </div>
+  <div class="card-tabs">
+  <ul class="tabs tabs-fixed-width tabs-transparent">
+  <li class="tab"><a class="active" href="#test4">Sintoma</a></li>
+  <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
+  <div class="card-content blue lighten-5">
+  <div id="test4"><p id="p-sintoma">#{reg.sint}</p></div>
+  </div>
+  </div>
+  <div class="card-tabs">
+  <ul class="tabs tabs-fixed-width tabs-transparent">
+  <li class="tab"><a class="active" href="#test5">Causa</a></li>
+  <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
+  <div class="card-content blue lighten-5">
+  <div id="test5"><p id="p-causa">#{reg.caus}</p></div>
+  </div>
+  </div>
+  <div class="card-tabs">
+  <ul class="tabs tabs-fixed-width tabs-transparent">
+  <li class="tab"><a class="active"  href="#test6">Solucion</a></li>
+  <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
+  </div>
+  <div class="card-content blue lighten-5">
+  <div id="test6"><p id="p-solucion">#{reg.solu}</p></div>
+  </div>
+  
+  <div class="card-content blue lighten-5">
+  <div id="test4"><p> </p></div>
+  </div>
+  </div>
+  
+
+  <!----EDITAR REGISTRO-->
+
+  <form class="form-group"id="f-editReg" action="/edit" method="post">
+  <h3>Editar Registro</h3>
+  <div class="form-group">
+  <div class="form-group">
+  <label for="titulo">Titulo</label>
+  <input type="text" name="titulo" value="#{reg.tit}">
+  <input type="hidden" name="st" value=#{sessionToken}>
+  <input type="hidden" name="id" value=#{id}>
+  </div>
+  <div class="form-group">
+  <label for="fab">Fabricante</label>
+  <select class="browser-default" name="fab" id="fab" value="#{reg.fabid}" required>
+  <option  disabled selected>Seleccione el fabricante</option>
+  if fabsd
+    each fab, id in fabsd
+      option(value=id) #{fab}
+  </select>
+  <br>
+  </div>
+  <div class="form-group">
+  <label for="tec">Tecnología</label>
+  <select class="browser-default" name="tec" id="tec" value="#{reg.tecid}" required>
+  <option  disabled selected>Seleccione la tecnología</option>
+  if tecsd
+    each tec, id in tecsd
+      option(value=id) #{tec}
+  </select>
+  <br>
+  </div>
+  <div class="form-group">
+  <label for="mod">Modelo/s</label>
+  <input type="text" value="#{reg.mod}" name="mod" required>
+  </div>
+  <div class="form-group">
+  <label for="area">Area</label>
+  <select class="browser-default" id="area" name="area" value="#{reg.areaid}" required>
+  <option  disabled selected>Seleccione el área</option>
+  if areasd
+    each area, id  in areasd
+      option(value=id) #{area}
+  </select>
+  <br>
+  </div>
+
+  <div class="form-group">
+  <label for="sint">Sintoma/Diagnostico</label>
+  <textarea class="materialize-textarea" type="text" name="sint" cols="3" required>#{reg.sint}</textarea>
+  </div>
+
+  <div class="form-group">
+  <label for="caus">Causa</label>
+  <textarea class="materialize-textarea" type="text" value="" name="caus" cols="3" required>#{reg.caus}</textarea>
+  </div>
+
+  <div class="form-group">
+  <label for="solu">Solucion</label>
+  <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3" required>#{reg.solu}</textarea>
+  </div>
+  <br>
+
+  <button type="submit" class="btn btn-primary" name="button" id="bt-editar" >Editar registro</button> <button type="button" class="btn btn-primary" name="button" id="bt-cancelar" >Cancelar</button>
+  </div>
+
+  </form>
+
+block script
+  script(src='/javascripts/register.js')
+  if id
+    script(type='text/javascript').
+      $('#bt-del').click(function(){
+        var $toastContent = $('<span>¿Deseas borrar el contenido?</span>').add($('<a href="/delete?st=#{sessionToken}&id=#{id}" class="btn-flat toast-action">Si</a><button class="btn-flat toast-action" onclick="toast.remove()">No</button>'));
+        toast = Materialize.toast($toastContent, 10000, 'rounded');
+        });
