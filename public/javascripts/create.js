@@ -1,15 +1,11 @@
 $(document).ready(function() {
 	$('#btn-delfile').hide();
 
+	/*if (msg){
+		Materialize.toast(msg, 3000, 'rounded',function(){
+		window.location= "/register?st="+sessionToken+"&id="+id});
+	}*/
 
-	if (typeof(Storage) !== "undefined") {
-		if (!localStorage.sessionToken) {
-			window.location='/';
-		}
-	} else {
-			// Sorry! No Web Storage support..
-			alert("Sorry! No Web Storage support..");
-	}
 
 	$('#bt-nregistro').click(function(){
   });
