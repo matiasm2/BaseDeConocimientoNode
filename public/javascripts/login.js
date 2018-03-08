@@ -2,10 +2,10 @@ $(document).ready(function() {
 
 	if (typeof(Storage) !== "undefined") {
 		if (localStorage.sessionToken) {
-			window.location='/search';
+			window.location='/search?st='+localStorage.sessionToken;
 		}
 	} else {
-		alert('There is not support for LocalStorage');
+			Materialize.toast('There is not support for LocalStorage', 3000, 'rounded');
 	}
 
     $('#submit').click(function(){
@@ -14,7 +14,7 @@ $(document).ready(function() {
 			sessionToken = response.RequestedObject.SessionToken;
 			if (sessionToken){
 				 localStorage.sessionToken = sessionToken;
-				 window.location= "/search"
+				 window.location= "/search?st="+sessionToken;
 			}
     });
 });
@@ -31,9 +31,9 @@ function login(username, password){
            password : password
          },
 				 success: function(data, textStatus, jqXHR) {
-					 response = JSON.parse(data);
+					 response = data;
 					 if (!response.IsSuccessful){
-             alert(response.ValidationMessages);
+             Materialize.toast('Ocurrio un problema:\n'+response.ValidationMessages[0].Reason, 3000, 'rounded');
            }
 				},
 				error: function(jqXHR, textStatus, errorThorwn) {
@@ -44,5 +44,5 @@ function login(username, password){
 
 		});
 
-		return response;
+		return response
 }

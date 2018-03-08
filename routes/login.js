@@ -1,9 +1,12 @@
 var express = require('express');
-var rest = require('../apiCalls');
+var api = require('../apiCalls');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  if (!req.query.st){
+    res.render('login', { title: 'Login - Base de Conocimiento', logout: true});
+  }
     res.render('login', { title: 'Login - Base de Conocimiento' });
 });
 
@@ -15,7 +18,7 @@ router.post('/', function(req, res, next) {
         "Password": req.body.password
     }
 
-    response = rest.restAPICall(rest.headers, 'POST', 'http://10.100.107.90/api/core/security/login', body);
+    response = api.restAPICall(api.headers, 'POST', api.url+'/api/core/security/login', body);
     res.send(response);
 });
 

@@ -9,6 +9,7 @@ html
     <div class="nav-wrapper light-blue darken-4">
     <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
     if sessionToken
+      <a href="/?st=#{sessionToken}"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
       <ul class="right hide-on-med-and-down">
       <li><a href="/create?st=#{sessionToken}">Crear Registro</a></li>
       <li><a href="/search?st=#{sessionToken}">Buscar Registro</a></li>
@@ -20,11 +21,17 @@ html
       <ul class="right hide-on-large-only">
       <li><a href="javascript:void(0)" id="bt-mov-logout"><i class="material-icons">exit_to_app</i></a></li>
       </ul>
+    else
+      <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
+      
     </div>
     </nav>
     div(class="container")
       block content
-    
+        
+    if logout
+      script(type='text/javascript').
+        localStorage.sessionToken = ''
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/materialize.min.js')
     block script

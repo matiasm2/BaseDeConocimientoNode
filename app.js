@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var create = require('./routes/create');
+var del = require('./routes/delete');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var register = require('./routes/register');
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
 app.use('/create', create);
+app.use('/delete', del);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
