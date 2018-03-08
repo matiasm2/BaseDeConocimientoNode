@@ -57,7 +57,7 @@ block content
   <div class="form-group">
   <label for="fab">Fabricante</label>
   <select class="browser-default" name="fab" id="fab" value="#{reg.fabid}" required>
-  <option  disabled selected>Seleccione el fabricante</option>
+  <option  disabled>Seleccione el fabricante</option>
   if fabsd
     each fab, id in fabsd
       option(value=id) #{fab}
@@ -67,7 +67,7 @@ block content
   <div class="form-group">
   <label for="tec">Tecnología</label>
   <select class="browser-default" name="tec" id="tec" value="#{reg.tecid}" required>
-  <option  disabled selected>Seleccione la tecnología</option>
+  <option  disabled>Seleccione la tecnología</option>
   if tecsd
     each tec, id in tecsd
       option(value=id) #{tec}
@@ -81,7 +81,7 @@ block content
   <div class="form-group">
   <label for="area">Area</label>
   <select class="browser-default" id="area" name="area" value="#{reg.areaid}" required>
-  <option  disabled selected>Seleccione el área</option>
+  <option  disabled>Seleccione el área</option>
   if areasd
     each area, id  in areasd
       option(value=id) #{area}
@@ -112,6 +112,11 @@ block content
 
 block script
   script(src='/javascripts/register.js')
+  if reg
+    script(type='text/javascript').
+      $('#tec').val(#{reg.tecid});
+      $('#fab').val(#{reg.fabid});
+      $('#area').val(#{reg.areaid});
   if id
     script(type='text/javascript').
       $('#bt-del').click(function(){

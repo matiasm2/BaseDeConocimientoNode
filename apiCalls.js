@@ -32,6 +32,73 @@ module.exports ={
       }
       return JSON.parse(response)
     },
+    "getContentBody": function(reg, id = ''){
+      body = {
+           "Content":{
+               "LevelId" :  this.ids.levelId,
+               "FieldContents" : {
+                    [String( this.ids.tit)]: {
+                        "Type" : 1,
+                        "Value" :  reg.titulo,
+                         "FieldId":  this.ids.tit
+                     },
+                     [String( this.ids.area)]: {
+                         "Type" : 4,
+                         "Value" : {
+                              "ValuesListIds" : [ reg.area],
+                              "OtherText" : null
+                            },
+                          "FieldId":  this.ids.area
+                      },
+                      [String( this.ids.fab)]: {
+                          "Type" : 4,
+                          "Value" : {
+                                "ValuesListIds" : [ reg.fab],
+                                "OtherText" : null
+                              },
+                           "FieldId":  this.ids.fab
+                       },
+                      [String( this.ids.tec)]: {
+                          "Type" : 4,
+                          "Value" : {
+                                "ValuesListIds" :  [ reg.tec],
+                                "OtherText" : null
+                              },
+                           "FieldId":  this.ids.tec
+                       },
+                       [String( this.ids.mod)]: {
+                           "Type" : 1,
+                           "Value" :  reg.mod,
+                            "FieldId":  this.ids.mod
+                        },
+                        [String( this.ids.sint)]: {
+                            "Type" : 1,
+                            "Value" :  reg.sint,
+                             "FieldId":  this.ids.sint
+                         },
+                         [String( this.ids.caus)]: {
+                             "Type" : 1,
+                             "Value" :  reg.caus,
+                              "FieldId":  this.ids.caus
+                          },
+                          [String( this.ids.solu)]: {
+                              "Type" : 1,
+                              "Value" :  reg.solu,
+                               "FieldId":  this.ids.solu
+                           },
+                        [String( this.ids.att)]: {
+                            "Type" : 11,
+                            "Value" : [],
+                             "FieldId":  this.ids.att
+                         }
+                    }
+                }
+        }
+        if (id){
+          body['Content']['Id'] = id;
+        }
+        return body
+    },
     "url": "http://10.100.107.90",
     "ids": {
       "moduleId": 542, //Punultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/542/false/default/368)
