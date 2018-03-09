@@ -62,7 +62,7 @@ function createSearchOptionsHora(txticket){
 	if($('#check')[0].checked){
 		tecnologia= '<ValueListFilterCondition>'+
 						'<Operator>Contains</Operator>'+
-						'<Field>22520</Field>'+
+						'<Field>30529</Field>'+
 						'<IsNoSelectionIncluded>False</IsNoSelectionIncluded>'+
 						'<Values>'+
 							'<Value>'+$('#tec').val()+'</Value>'+
@@ -72,7 +72,7 @@ function createSearchOptionsHora(txticket){
 	if($('#check2')[0].checked){
 			fabricante= '<ValueListFilterCondition>'+
 						'<Operator>Contains</Operator>'+
-						'<Field>22523</Field>'+
+						'<Field>30532</Field>'+
 						'<IsNoSelectionIncluded>False</IsNoSelectionIncluded>'+
 						'<Values>'+
 							'<Value>'+$('#fab').val()+'</Value>'+
@@ -201,4 +201,3 @@ function executeSearch (sessionToken, searchOptions, pageNumber){
 		}
 	});
 }
-
