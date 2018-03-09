@@ -21,6 +21,9 @@ block content
   <label for="fab">Fabricante</label>
   <select class="browser-default" id="fab" required>
   <option value="" disabled selected>Seleccione el fabricante</option>
+  if fabsd
+    each fab, id in fabsd
+      option(value=id) #{fab}
   </select>
   <br>
   </div>
@@ -38,7 +41,9 @@ block content
   <label for="tec">Tecnología</label>
   <select class="browser-default" id="tec" required>
   <option value="" disabled selected>Seleccione la tecnología</option>
-
+  if tecsd
+    each tec, id in tecsd
+      option(value=id) #{tec}
   </select>
   <br>
   </div>
@@ -61,4 +66,5 @@ block content
   <a class="light-blue accent-4 waves-effect waves-light btn" id="bt-research">Volver a buscar</a>
 
 block script
+  script(src='/javascripts/jquery.soap.js')
   script(src='/javascripts/search.js')
