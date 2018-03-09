@@ -12,17 +12,29 @@ module.exports ={
         "Authorization":"Archer session-id="+sessionToken
       }
     },
+	 "headersSOAP": function(soapAction){
+      return {
+        "Content-Type" : "text/xml;charset=utf-8",
+		"SOAPAction" : soapAction
+      }
+    },
+	
     "restAPICall" : function(headers, method, url, body){
       var response;
       options = {
         "headers": headers,
         "rejectUnauthorized": false
       }
-      if (method==='POST' || method==='PUT'){
-        options.body = JSON.stringify(body);
-      } else {
-        options['headers']['X-Http-Method-Override'] = 'GET';
-      }
+	  if(!headers.SOAPAction){
+		if (method==='POST' || method==='PUT'){
+			options.body = JSON.stringify(body);
+		} else {
+			options['headers']['X-Http-Method-Override'] = 'GET';
+		} 
+	  }else{
+		  options.body = body;
+	  }
+   
 
       var req = request(method, url, options);
       if(req.statusCode <= 300){
@@ -30,7 +42,12 @@ module.exports ={
       } else {
         response = '{"StatusCode": '+req.statusCode+',"IsSuccessful":false}';
       }
-      return JSON.parse(response)
+	  if(!headers.SOAPAction){
+		return JSON.parse(response)  
+	  } else {
+		  return response
+	  }
+      
     },
     "getContentBody": function(reg, id = ''){
       body = {
