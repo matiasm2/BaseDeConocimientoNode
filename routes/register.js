@@ -5,7 +5,6 @@ var api = require('../apiCalls');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   content = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'//api/core/content/'+req.query.id, '');
-  console.log(content);
   if (!content.IsSuccessful){
     res.render('error', { title: content.ValidationMessages[0].Description+' - Base de Conocimiento', sessionToken: req.query.st});
 
@@ -44,7 +43,20 @@ router.get('/', function(req, res, next) {
       reg['areaid'] = area.RequestedObject.Id;
     }
   });
-  res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg });
+  var atts = content.RequestedObject.FieldContents[api.ids.att].Value;
+  attsarr = [];
+  if (atts){
+    atts.forEach(function(i){
+        attachment = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/content/attachment/'+i, '');
+        mimeType = api.getMymeType(attachment.RequestedObject.AttachmentName.split('.')[1]);
+        var a = {"base64":'data:'+mimeType+';base64,'+attachment.RequestedObject.AttachmentBytes, "name": attachment.RequestedObject.AttachmentName};
+        attsarr.push(a);
+
+    });
+    res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg, attsarr: attsarr});
+  }
+  res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg});
+  res.end();
 });
 
 module.exports = router;

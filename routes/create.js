@@ -1,5 +1,6 @@
 var express = require('express');
 var api = require('../apiCalls');
+var request = require('request');
 var router = express.Router();
 
 /* GET users listing. */
@@ -24,71 +25,58 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  body = {
-       "Content":{
-           "LevelId" : api.ids.levelId,
-           "FieldContents" : {
-                [String(api.ids.tit)]: {
-                    "Type" : 1,
-                    "Value" : req.body.titulo,
-                     "FieldId": api.ids.tit
-                 },
-                 [String(api.ids.area)]: {
-                     "Type" : 4,
-                     "Value" : {
-                          "ValuesListIds" : [req.body.area],
-                          "OtherText" : null
-                        },
-                      "FieldId": api.ids.area
-                  },
-                  [String(api.ids.fab)]: {
-                      "Type" : 4,
-                      "Value" : {
-                            "ValuesListIds" : [req.body.fab],
-                            "OtherText" : null
-                          },
-                       "FieldId": api.ids.fab
-                   },
-                  [String(api.ids.tec)]: {
-                      "Type" : 4,
-                      "Value" : {
-                            "ValuesListIds" :  [req.body.tec],
-                            "OtherText" : null
-                          },
-                       "FieldId": api.ids.tec
-                   },
-                   [String(api.ids.mod)]: {
-                       "Type" : 1,
-                       "Value" : req.body.mod,
-                        "FieldId": api.ids.mod
-                    },
-                    [String(api.ids.sint)]: {
-                        "Type" : 1,
-                        "Value" : req.body.sint,
-                         "FieldId": api.ids.sint
-                     },
-                     [String(api.ids.caus)]: {
-                         "Type" : 1,
-                         "Value" : req.body.caus,
-                          "FieldId": api.ids.caus
-                      },
-                      [String(api.ids.solu)]: {
-                          "Type" : 1,
-                          "Value" : req.body.solu,
-                           "FieldId": api.ids.solu
-                       },
-                    [String(api.ids.att)]: {
-                        "Type" : 11,
-                        "Value" : [],
-                         "FieldId": api.ids.att
-                     }
-                }
-            }
-    }
+    attsJSON = JSON.parse(req.body.att);
+    req.body.att = [];
+    body = api.getContentBody(req.body, '');
     response = api.restAPICall(api.headersWAuth(req.body.st), 'POST', api.url+'/api/core/content', body);
-    console.log(response);
+
     if (response.IsSuccessful){
-      res.render('create',{sessionToken: req.body.st, msg: 'Se ha creado el registro con exito', id: response.RequestedObject.Id});
+      var contentId = response.RequestedObject.Id;
+
+      if (attsJSON.filesNames.length > 0){
+        var cont = 0;
+        console.log(attsJSON);
+        for (i = 0; i < attsJSON.filesNames.length; i++){
+          content = api.restAPICall(api.headersWAuth(req.body.st), 'GET', api.url+'/api/core/content/'+contentId, '');
+
+          console.log(content.RequestedObject.FieldContents[api.ids.att]);
+          var values = content.RequestedObject.FieldContents[api.ids.att].Value;
+          attBody = api.getAttachmentBody(attsJSON.filesNames[i], attsJSON.filesBytes[i]);
+          console.log(attBody);
+          options = {
+              "url": api.url+'/api/core/content/attachment',
+              "method": "POST",
+              "headers": api.headersWAuth(req.body.st),
+              "rejectUnauthorized": false,
+              "body": JSON.stringify(attBody)
+          }
+          request(options, function(error, response, body){
+            if (!error && response.statusCode == 200) {
+              var info = JSON.parse(body);
+              if (info.IsSuccessful){
+                if (values){
+                  values.push(info.RequestedObject.Id);
+                } else {
+                  values = [info.RequestedObject.Id];
+                }
+                body = api.getAttBody(contentId, values);
+                response = api.restAPICall(api.headersWAuth(req.body.st), 'PUT', api.url+'/api/core/content', body);
+                console.log(response);
+                if (response.IsSuccessful){
+                  cont++;
+                  if (cont === attsJSON.filesNames.length){
+                    res.render('create',{sessionToken: req.body.st, msg: 'Se ha creado el registro con exito', id: response.RequestedObject.Id});
+                  }
+                }
+              } else {
+                console.log(info);
+              }
+            }
+
+
+          });
+        }
+      }
     } else if (response.StatusCode === 401){
       res.redirect(401, '/logout?st='+req.body.st);
     } else{

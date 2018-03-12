@@ -63,10 +63,11 @@ block content
   <div class="file-field input-field">
   <div class="btn">
   <span>Adjuntos</span>
-  <input type="file" name="files" multiple>
+  <input type="file" name="files" id="files" multiple accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/pdf, image/png, application/msword, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/csv, text/plain, image/jpeg, image/gif" >
   </div>
   <div class="file-path-wrapper">
   <input class="file-path validate" type="text" placeholder="Upload one or more files" id="txt" >
+  <input type="hidden" name="att" id="att" >
   </div>
   <a class="waves-effect waves-teal btn-flat" id="btn-delfile"><i class="material-icons left">delete</i></a>
   </div>

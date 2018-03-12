@@ -18,36 +18,34 @@ module.exports ={
 		"SOAPAction" : soapAction
       }
     },
-	
-    "restAPICall" : function(headers, method, url, body){
-      var response;
-      options = {
-        "headers": headers,
-        "rejectUnauthorized": false
-      }
-	  if(!headers.SOAPAction){
-		if (method==='POST' || method==='PUT'){
-			options.body = JSON.stringify(body);
-		} else {
-			options['headers']['X-Http-Method-Override'] = 'GET';
-		} 
-	  }else{
-		  options.body = body;
-	  }
-   
 
-      var req = request(method, url, options);
-      if(req.statusCode <= 300){
-          if(req.getBody())response=req.getBody();
-      } else {
-        response = '{"StatusCode": '+req.statusCode+',"IsSuccessful":false}';
-      }
-	  if(!headers.SOAPAction){
-		return JSON.parse(response)  
-	  } else {
-		  return response
-	  }
-      
+    "restAPICall" : function(headers, method, url, body){
+        var response;
+        options = {
+            "headers": headers,
+            "rejectUnauthorized": false
+        }
+        if(!headers.SOAPAction){
+            if (method==='POST' || method==='PUT'){
+                options.body = JSON.stringify(body);
+            } else {
+                options['headers']['X-Http-Method-Override'] = 'GET';
+            }
+        }else{
+            options.body = body;
+        }
+
+        var req = request(method, url, options);
+        if(req.statusCode <= 300){
+            if(req.getBody())response=req.getBody();
+        } else {
+            response = '{"StatusCode": '+req.statusCode+',"IsSuccessful":false}';
+        }
+        if(!headers.SOAPAction){
+            return JSON.parse(response)
+        } else {
+            return response
+        }
     },
     "getContentBody": function(reg, id = ''){
       body = {
@@ -105,7 +103,7 @@ module.exports ={
                            },
                         [String( this.ids.att)]: {
                             "Type" : 11,
-                            "Value" : [],
+                            "Value" : reg.att,
                              "FieldId":  this.ids.att
                          }
                     }
@@ -115,6 +113,79 @@ module.exports ={
           body['Content']['Id'] = id;
         }
         return body
+    },
+    "getAttBody": function(id, atts){
+      body = {
+           "Content":{
+               "LevelId" :  this.ids.levelId,
+               "FieldContents" : {
+                        [String( this.ids.att)]: {
+                            "Type" : 11,
+                            "Value" : atts,
+                             "FieldId":  this.ids.att
+                         }
+                    }
+                }
+        }
+        if (id){
+          body['Content']['Id'] = id;
+        }
+        return body
+    },
+    "getAttachmentBody": function(attachmentName, attachmentBytes){
+      return {"AttachmentName":attachmentName, "AttachmentBytes":attachmentBytes}
+    },
+    "getMymeType": function(ext){
+    		ext = ext.toLowerCase();
+    		mimeType = '';
+    		switch(ext){
+    			case 'docx':
+    				mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    				break;
+    			case 'doc':
+    			case 'dot':
+    					mimeType = 'application/msword';
+    					break;
+    			case 'xls':
+    			case 'xlm':
+    			case 'xla':
+    			case 'xlc':
+    			case 'xlt':
+    			case 'xlw':
+    				mimeType = 'application/vnd.ms-exce';
+    				break;
+    			case 'xlsx':
+    					mimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    					break;
+    			case 'pdf':
+    				mimeType = 'application/pdf';
+    				break;
+    			case 'csv':
+    					mimeType = 'text/csv';
+    					break;
+    			case 'txt':
+    			case 'text':
+    			case 'conf':
+    			case 'def':
+    				mimeType = 'text/plain';
+    				break;
+    			case 'png':
+    					mimeType = 'image/png';
+    					break;
+    			case 'jpeg':
+    			case 'jpg':
+    			case 'jpe':
+    				mimeType = 'image/jpeg';
+    				break;
+    			case 'gif':
+    				mimeType = 'image/gif';
+    				break;
+    			case '':
+    					mimeType = '';
+    					break;
+    		}
+
+    		return mimeType;
     },
     "url": "http://10.100.107.90",
     "ids": {
