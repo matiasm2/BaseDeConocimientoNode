@@ -125,3 +125,8 @@ block script
         var $toastContent = $('<span>¿Deseas borrar el contenido?</span>').add($('<a href="/delete?st=#{sessionToken}&id=#{id}" class="btn-flat toast-action">Si</a><button class="btn-flat toast-action" onclick="toast.remove()">No</button>'));
         toast = Materialize.toast($toastContent, 10000, 'rounded');
         });
+  if msg
+      script(type='text/javascript').
+        var id = #{id};
+        Materialize.toast('#{msg}', 3000, 'rounded',function(){
+          if (id)window.location= "/register?st=#{sessionToken}&id=#{id}"});

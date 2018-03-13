@@ -83,7 +83,8 @@ block script
       script(type='text/javascript').
         var id = #{id};
         Materialize.toast('#{msg}', 3000, 'rounded',function(){
-          if (id)window.location= "/register?st=#{sessionToken}&id=#{id}"});
+          if (id)
+            window.location= "/register?st=#{sessionToken}&id=#{id}"});
   
   script(src='/javascripts/create.js')
   

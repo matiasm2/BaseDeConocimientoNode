@@ -7,11 +7,11 @@ router.post('/', function(req, res, next) {
     response = api.restAPICall(api.headersWAuth(req.body.st), 'PUT', api.url+'/api/core/content', body);
     console.log(response);
     if (response.IsSuccessful){
-      res.render('create',{sessionToken: req.body.st, msg: 'Se ha editado el registro con exito', id: response.RequestedObject.Id});
+      res.render('register',{sessionToken: req.body.st, msg: 'Se ha editado el registro con exito', id: response.RequestedObject.Id});
     } else if (response.StatusCode === 401){
       res.redirect(401, '/logout?st='+req.body.st);
     } else{
-      res.render('create',{sessionToken: req.body.st, msg: 'Ha ocurrido un error al crear el registro.',id: ''});
+      res.render('search',{sessionToken: req.body.st, msg: 'Ha ocurrido un error al editar el registro.'});
     }
 });
 

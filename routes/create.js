@@ -80,7 +80,7 @@ router.post('/', function(req, res, next) {
     } else if (response.StatusCode === 401){
       res.redirect(401, '/logout?st='+req.body.st);
     } else{
-      res.render('create',{sessionToken: req.body.st, msg: 'Ha ocurrido un error al crear el registro.',id: ''});
+      res.render('search',{sessionToken: req.body.st, msg: 'Ha ocurrido un error al crear el registro.'});
     }
 });
 

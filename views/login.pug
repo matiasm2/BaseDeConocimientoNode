@@ -16,3 +16,6 @@ block content
 
 block script
   script(src='/javascripts/login.js')
+  if msg
+      script(type='text/javascript').
+        Materialize.toast('#{msg}', 3000, 'rounded');
