@@ -58,7 +58,7 @@ router.get('/', function(req, res, next) {
 
     });
     res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg, attsarr: attsarr});
-    res.end();s
+    res.end();
   }
   res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg});
   res.end();
