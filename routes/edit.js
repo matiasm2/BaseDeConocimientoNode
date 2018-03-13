@@ -8,10 +8,13 @@ router.post('/', function(req, res, next) {
     console.log(response);
     if (response.IsSuccessful){
       res.render('register',{sessionToken: req.body.st, msg: 'Se ha editado el registro con exito', id: response.RequestedObject.Id});
+      res.end();
     } else if (response.StatusCode === 401){
       res.redirect(401, '/logout?st='+req.body.st);
+      res.end();
     } else{
       res.render('search',{sessionToken: req.body.st, msg: 'Ha ocurrido un error al editar el registro.'});
+      res.end();
     }
 });
 

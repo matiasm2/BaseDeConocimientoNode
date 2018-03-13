@@ -7,6 +7,10 @@ var api = require('../apiCalls');
 router.get('/', function(req, res, next) {
   fabs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.fabVL, '');
   tecs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.tecVL, '');
+  if(fabs.StatusCode === 401 || tecs.StatusCode === 401){
+    res.redirect(401, '/logout?st='+req.query.st);
+    res.end();
+  }
   tecsd = {}
   fabsd = {}
   fabs.forEach(function(fab){
@@ -17,19 +21,19 @@ router.get('/', function(req, res, next) {
   });
 
   res.render('search', { title: 'Buscar - Base de Conocimiento', sessionToken: req.query.st, fabsd: fabsd, tecsd: tecsd});
+  res.end();
 });
 
 router.post('/', xmlparser({trim: false, explicitArray: false}), function(req, res, next) {
-	
+
 	//console.log(req.headers);
 	console.log(req);
 	resp = api.restAPICall(api.headersSOAP(req.headers.soapaction), 'POST', api.url+'/ws/search.asmx', req.rawBody);
 	console.log(resp.toString('utf8'));
 	res.send(resp.toString('utf8'));
+  res.end();
 
 });
 
 
 module.exports = router;
-
-

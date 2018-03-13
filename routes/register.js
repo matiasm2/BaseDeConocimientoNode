@@ -12,6 +12,10 @@ router.get('/', function(req, res, next) {
   fabs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.fabVL, '');
   tecs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.tecVL, '');
   areas = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.areaVL, '');
+  if(fabs.StatusCode === 401 || tecs.StatusCode === 401 || areas.StatusCode === 401){
+    res.redirect('/logout?st='+req.query.st);
+    res.end();
+  }
   tecsd = {}
   fabsd = {}
   areasd = {}
@@ -54,6 +58,7 @@ router.get('/', function(req, res, next) {
 
     });
     res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg, attsarr: attsarr});
+    res.end();s
   }
   res.render('register', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: areasd, reg: reg});
   res.end();
