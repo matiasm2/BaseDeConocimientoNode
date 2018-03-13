@@ -14,7 +14,7 @@ $(document).ready(function() {
 			sessionToken = response.RequestedObject.SessionToken;
 			if (sessionToken){
 				 localStorage.sessionToken = sessionToken;
-				 window.location= "/search?st="+sessionToken;
+				 window.location= "/index?st="+sessionToken;
 			}
     });
 });
