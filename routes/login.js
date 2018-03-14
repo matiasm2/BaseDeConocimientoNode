@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     body = {
-        "InstanceName":"DEV",
+        "InstanceName":api.instanceName,
         "Username": req.body.username,
         "UserDomain":"",
         "Password": req.body.password

@@ -188,6 +188,7 @@ module.exports ={
     		return mimeType;
     },
     "url": "http://10.100.107.90",
+    "instanceName": "DEV",
     "ids": {
       "moduleId": 542, //Punultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/542/false/default/368)
       "levelId": 368,  //Ultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/542/false/default/368)
@@ -204,22 +205,23 @@ module.exports ={
       "tecVL": 5681,
       "areaVL": 5683
     }
-    /*
+    /*"url": "http://172.16.1.52",
+    "instanceName": "PROD",
     "ids": { //Pr
-      "moduleId": 542, //Punultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/542/false/default/368)
-      "levelId": 368,  //Ultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/542/false/default/368)
-      "tit": 30523,
-      "fab": 30532,
-      "tec": 30529,
-      "mod": 30537,
-      "area": 30533,
-      "sint": 30530,
-      "caus": 30534,
-      "solu": 30535,
-      "att": 30536,
-      "fabVL": 5682,
-      "tecVL": 5681,
-      "areaVL": 5683
-    }
-    */
+      "moduleId": 2467, //Punultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/2467/false/default/2261)
+      "levelId": 2261,  //Ultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/2467/false/default/2261)
+      "tit": 22517,
+      "fab": 22523,
+      "tec": 22520,
+      "mod": 22528,
+      "area": 22524,
+      "sint": 22521,
+      "caus": 22525,
+      "solu": 22526,
+      "att": 22527,
+      "fabVL": 2682,
+      "tecVL": 2681,
+      "areaVL": 5886
+    }*/
+
 }
