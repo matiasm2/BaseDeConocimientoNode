@@ -3,16 +3,18 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/materialize.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
   body
+    <header>
     <nav>
     <div class="nav-wrapper light-blue darken-4">
     <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
     if sessionToken
       <a href="/index?st=#{sessionToken}"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
       <ul class="right hide-on-med-and-down">
-      <li><a href="/create?st=#{sessionToken}">Crear Registro</a></li>
-      <li><a href="/search?st=#{sessionToken}">Buscar Registro</a></li>
+      <li><a href="/create?st=#{sessionToken}" id='bt-create'>Crear Registro</a></li>
+      <li><a href="/search?st=#{sessionToken}" id='bt-search'>Buscar Registro</a></li>
       <li><a  href="/logout?st=#{sessionToken}" class="light-blue accent-4 waves-effect waves-light btn" id="bt-logout">Exit</a></li>
       </ul>
       <ul class="left hide-on-large-only">
@@ -23,11 +25,27 @@ html
       </ul>
     else
       <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
-      
-    </div>
-    </nav>
-    div(class="container")
+    </header> 
+  
+  <main>
+  div(class="container")
       block content
+  
+  </main>
+	
+
+		
+	
+
+    
+	  
+    <footer class="page-footer  light-blue darken-4">
+          <div class="footer-copyright">
+            <div class="container">Base de Conocimiento
+            <a class="grey-text text-lighten-4 right" href="#!">Novared©2018</a>
+            </div>
+          </div>
+    </footer>
         
     if logout
       script(type='text/javascript').
@@ -35,3 +53,4 @@ html
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/materialize.min.js')
     block script
+    
