@@ -5,11 +5,17 @@ block content
   <h3>Bienvenido a la base de conocimiento de Novared!</h3>
   <form action="javascript:void(0)" id="index">
   <p>
-  <a href="/create?st=#{sessionToken}"><button type="button" class="light-blue darken-4 waves-effect waves-light btn" id="create">Crear Registro</button></a>
+  
   </p>
   <p>
-  <a href="/search?st=#{sessionToken}"><button type="button" class="light-blue darken-4 waves-effect waves-light btn" id="search">Buscar Registro</button></a>
+  <a href="/create?st=#{sessionToken}"><button type="button" class="light-blue darken-4 waves-effect waves-light btn" id="create">Crear Registro</button></a> <a href="/search?st=#{sessionToken}"><button type="button" class="light-blue darken-4 waves-effect waves-light btn" id="search">Buscar Registro</button></a>
   </p>
-  </form>
   
-   block script
+  </form>
+  block script
+    script(type='text/javascript').
+      $('#bt-search').hide();
+      $('#bt-create').hide();
+  
+  
+
