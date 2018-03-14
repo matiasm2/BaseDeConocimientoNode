@@ -183,10 +183,14 @@ function executeSearch (sessionToken, searchOptions, pageNumber){
 			console.log(soapResponse);
 			var xmlDoc = jQuery.parseXML(soapResponse.content.documentElement.getElementsByTagName('ExecuteSearchResult')[0].lastChild.data);
 			console.log(xmlDoc);
-			$('#tbody').html('');
-			for (i = 0; i < xmlDoc.documentElement.getElementsByTagName('Record').length; i++){
-				record = xmlDoc.documentElement.getElementsByTagName('Record')[i];
-				createRecordRow(record);
+			if (xmlDoc.documentElement.getElementsByTagName('Record').length > 0){
+				$('#tbody').html('');
+				for (i = 0; i < xmlDoc.documentElement.getElementsByTagName('Record').length; i++){
+					record = xmlDoc.documentElement.getElementsByTagName('Record')[i];
+					createRecordRow(record);
+				}
+			} else {
+				$('#tbody').html('<tr id="tr-msg"><td>No hay registros para mostrar.</td></tr>');
 			}
 		},
 		error: function (SOAPResponse) {
