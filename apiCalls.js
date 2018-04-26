@@ -39,6 +39,7 @@ module.exports ={
         if(req.statusCode <= 300){
             if(req.getBody())response=req.getBody();
         } else {
+            console.log(req.getBody());
             response = '{"StatusCode": '+req.statusCode+',"IsSuccessful":false}';
         }
         if(!headers.SOAPAction){
@@ -186,7 +187,7 @@ module.exports ={
     		}
 
     		return mimeType;
-    },
+    },/*
     "url": "http://10.100.107.90",
     "instanceName": "DEV",
     "ids": {
@@ -204,8 +205,8 @@ module.exports ={
       "fabVL": 5682,
       "tecVL": 5681,
       "areaVL": 5683
-    }
-    /*"url": "http://172.16.1.52",
+    }*/
+    "url": "http://172.16.1.52",
     "instanceName": "PROD",
     "ids": { //Pr
       "moduleId": 2467, //Punultimo numero de url (/apps/ArcherApp/Home.aspx#search/70/75/2467/false/default/2261)
@@ -222,6 +223,6 @@ module.exports ={
       "fabVL": 2682,
       "tecVL": 2681,
       "areaVL": 5886
-    }*/
+    }
 
 }

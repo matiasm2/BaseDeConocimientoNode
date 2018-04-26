@@ -4,9 +4,18 @@
  * Module dependencies.
  */
 
+var fs = require('fs');
 var app = require('../app');
 var debug = require('debug')('basedeconocimientonode:server');
 var http = require('http');
+var https = require('https');
+
+/**
+ *Cargamos los certificados
+ */
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +29,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -28,6 +38,9 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+httpsServer.listen(4433);
+httpsServer.on('error', onError);
+httpsServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

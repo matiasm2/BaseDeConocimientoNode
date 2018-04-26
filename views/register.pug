@@ -15,24 +15,24 @@ block content
   </div>
   </div>
   <div class="card-tabs">
-  <ul class="tabs tabs-fixed-width tabs-transparent">
-  <li class="tab"><a class="active" href="#test4">Sintoma</a></li>
+  <ul class="tabs tabs-transparent">
+  <li class="tab"><a href="#test4">Sintoma</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   <div class="card-content blue lighten-5">
   <div id="test4"><p id="p-sintoma">#{reg.sint}</p></div>
   </div>
   </div>
   <div class="card-tabs">
-  <ul class="tabs tabs-fixed-width tabs-transparent">
-  <li class="tab"><a class="active" href="#test5">Causa</a></li>
+  <ul class="tabs tabs-transparent">
+  <li class="tab"><a href="#test5">Causa</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   <div class="card-content blue lighten-5">
   <div id="test5"><p id="p-causa">#{reg.caus}</p></div>
   </div>
   </div>
   <div class="card-tabs">
-  <ul class="tabs tabs-fixed-width tabs-transparent">
-  <li class="tab"><a class="active"  href="#test6">Solucion</a></li>
+  <ul class="tabs tabs-transparent">
+  <li class="tab"><a href="#test6">Solucion</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   </div>
   <div class="card-content blue lighten-5">
@@ -52,7 +52,7 @@ block content
   <div class="form-group">
   <div class="form-group">
   <label for="titulo">Titulo</label>
-  <input type="text" name="titulo" value="#{reg.tit}">
+  <input type="text" name="titulo" value="#{reg.tit}" required>
   <input type="hidden" name="st" value=#{sessionToken}>
   <input type="hidden" name="id" value=#{id}>
   </div>
@@ -78,7 +78,7 @@ block content
   </div>
   <div class="form-group">
   <label for="mod">Modelo/s</label>
-  <input type="text" value="#{reg.mod}" name="mod" required>
+  <input type="text" value="#{reg.mod}" name="mod">
   </div>
   <div class="form-group">
   <label for="area">Area</label>
@@ -93,17 +93,17 @@ block content
 
   <div class="form-group">
   <label for="sint">Sintoma/Diagnostico</label>
-  <textarea class="materialize-textarea" type="text" name="sint" cols="3" required>#{reg.sint}</textarea>
+  <textarea class="materialize-textarea" type="text" name="sint" cols="3">#{reg.sint}</textarea>
   </div>
 
   <div class="form-group">
   <label for="caus">Causa</label>
-  <textarea class="materialize-textarea" type="text" value="" name="caus" cols="3" required>#{reg.caus}</textarea>
+  <textarea class="materialize-textarea" type="text" value="" name="caus" cols="3">#{reg.caus}</textarea>
   </div>
 
   <div class="form-group">
   <label for="solu">Solucion</label>
-  <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3" required>#{reg.solu}</textarea>
+  <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3">#{reg.solu}</textarea>
   </div>
   <br>
 

@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   fabs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.fabVL, '');
   tecs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.tecVL, '');
   if(fabs.StatusCode === 401 || tecs.StatusCode === 401){
-    res.redirect(401, '/logout?st='+req.query.st);
+    res.redirect('/logout?st='+req.query.st);
     res.end();
   }
   tecsd = {}
@@ -29,6 +29,10 @@ router.post('/', xmlparser({trim: false, explicitArray: false}), function(req, r
 	//console.log(req.headers);
 	console.log(req);
 	resp = api.restAPICall(api.headersSOAP(req.headers.soapaction), 'POST', api.url+'/ws/search.asmx', req.rawBody);
+  if(resp.StatusCode === 401){
+    res.redirect('/logout?st='+req.body.st);
+    res.end();
+  }
 	console.log(resp.toString('utf8'));
 	res.send(resp.toString('utf8'));
   res.end();
