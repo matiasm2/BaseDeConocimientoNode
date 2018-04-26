@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var compression = require('compression')
+var helmet = require('helmet')
 
 var attachment = require('./routes/attachment');
 var create = require('./routes/create');
@@ -58,5 +60,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+app.use(compression());
+app.use(helmet());
+app.disable('x-powered-by');
 
 module.exports = app;
