@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var attachment = require('./routes/attachment');
 var create = require('./routes/create');
 var del = require('./routes/delete');
 var edit = require('./routes/edit');
@@ -30,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
+app.use('/attachment', attachment);
 app.use('/create', create);
 app.use('/delete', del);
 app.use('/edit', edit);

@@ -50,9 +50,7 @@ router.get('/', function(req, res, next) {
   attsarr = [];
   if (atts){
     atts.forEach(function(i){
-        attachment = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/content/attachment/'+i, '');
-        mimeType = api.getMymeType(attachment.RequestedObject.AttachmentName.split('.')[1]);
-        var a = {"base64":'data:'+mimeType+';base64,'+attachment.RequestedObject.AttachmentBytes, "name": attachment.RequestedObject.AttachmentName};
+        var a = {"href": 'attachment?st='+req.query.st+'&id='+i};
         attsarr.push(a);
 
     });
