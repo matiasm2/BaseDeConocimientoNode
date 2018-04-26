@@ -15,7 +15,7 @@ module.exports ={
 	 "headersSOAP": function(soapAction){
       return {
         "Content-Type" : "text/xml;charset=utf-8",
-		"SOAPAction" : soapAction
+		    "SOAPAction" : soapAction
       }
     },
 
@@ -112,7 +112,9 @@ module.exports ={
         }
         if (id){
           body['Content']['Id'] = id;
+          delete body['Content']['FieldContents'][String( this.ids.att)];
         }
+
         return body
     },
     "getAttBody": function(id, atts){
