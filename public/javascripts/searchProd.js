@@ -97,23 +97,38 @@ function createSearchOptionsHora(txticket){
 						'</TextFilterCondition>'+
 						'<TextFilterCondition>'+
 							  '<Operator>Contains</Operator>'+
+							  '<Field name="Modelos">22528</Field>'+
+							  '<Value>'+txticket+'</Value>'+
+						'</TextFilterCondition>'+
+						'<TextFilterCondition>'+
+							  '<Operator>Contains</Operator>'+
+							  '<Field name="Version">24310</Field>'+
+							  '<Value>'+txticket+'</Value>'+
+						'</TextFilterCondition>'+
+						'<TextFilterCondition>'+
+							  '<Operator>Contains</Operator>'+
+							  '<Field name="Usuario_Creador">22529</Field>'+
+							  '<Value>'+txticket+'</Value>'+
+						'</TextFilterCondition>'+
+						'<TextFilterCondition>'+
+							  '<Operator>Contains</Operator>'+
 							  '<Field name="Solucion">22526</Field>'+
 							  '<Value>'+txticket+'</Value>'+
 						'</TextFilterCondition>';
 
-			operatorLogic = '<OperatorLogic>1 OR 2 OR 3 OR 4</OperatorLogic>';
+			operatorLogic = '<OperatorLogic>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7</OperatorLogic>';
 
 	}
 
 	if(txticket != '' && $('#check')[0].checked && $('#check2')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4) AND 5 AND 6</OperatorLogic>';
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8 AND 9</OperatorLogic>';
 	}
 
 	else if (txticket != '' && $('#check')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4) AND 5</OperatorLogic>';
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8</OperatorLogic>';
 	}
 	else if (txticket != '' && $('#check2')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4) AND 5</OperatorLogic>';
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8</OperatorLogic>';
 	}
 	else if ($('#check')[0].checked && $('#check2')[0].checked){
 		operatorLogic = '<OperatorLogic>1 AND 2</OperatorLogic>';
@@ -128,6 +143,9 @@ function createSearchOptionsHora(txticket){
 						'<DisplayField name="Solucion">'+22526+'</DisplayField>',
 						'<DisplayField name="Fabricante">'+22523+'</DisplayField>',
 						'<DisplayField name="Tecnología">'+22520+'</DisplayField>',
+						'<DisplayField name="Modelos">'+22528+'</DisplayField>',
+						'<DisplayField name="Version">'+24310+'</DisplayField>',
+						'<DisplayField name="Usuario_Creador">'+22529+'</DisplayField>',
 					'</DisplayFields>',
 					'<Criteria>',
 						'<ModuleCriteria>',
@@ -154,9 +172,12 @@ function createRecordRow(record){
 			  '<td>'+record.children[1].innerHTML+'</td>',
 			  '<td>'+record.children[3].innerHTML+'</td>',
 			  '<td>'+record.children[4].innerHTML+'</td>',
+			  '<td>'+record.children[5].innerHTML+'</td>',
+			  '<td>'+record.children[6].innerHTML+'</td>',
+			  '<td>'+record.children[7].childNodes[0].firstChild.attributes[1].nodeValue + " " + record.children[7].childNodes[0].firstChild.attributes[2].nodeValue + '</td>',
 		'</tr>'
 	];
-
+    console.log(record);
 	$('#tbody').append(html.join(''));
 }
 

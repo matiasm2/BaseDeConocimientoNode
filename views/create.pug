@@ -6,7 +6,7 @@ block content
   <form class="form-group" id="f-hora" action="/create" method="post">
   <div class="form-group">
   <div class="form-group">
-  <label for="titulo">Titulo</label>
+  <label for="titulo">Título</label>
   <input type="text" name="titulo" value="">
   <input type="hidden" name="st" value=#{sessionToken}>
   </div>
@@ -30,11 +30,27 @@ block content
   </select>
   <br>
   </div>
+  
   <div class="form-group">
-  <label for="mod">Modelo/s</label>
+  <label for="mod">Modelo</label>
   <input type="text" value="" name="mod" required>
   </div>
+  
   <div class="form-group">
+  <label for="ver">Versión</label>
+  <input type="text" value="" name="ver" required>
+  </div>
+  
+  
+  <div class="form-group">
+  <label for="linkf">Link de la KB del Fabricante</label>
+  <input type="text" value="" name="linkf" required>
+  </div>
+  <!--<div class="form-group">
+  <label for="mod">Usuario</label>
+  <input type="text" value="" name="mod" required>
+  </div>-->
+  <!--<div class="form-group">
   <label for="area">Area</label>
   <select class="browser-default" id="area" name="area" required>
   <option value="" disabled selected>Seleccione el área</option>
@@ -43,10 +59,10 @@ block content
       option(value=id) #{area}
   </select>
   <br>
-  </div>
+  </div>-->
 
   <div class="form-group">
-  <label for="sint">Sintoma/Diagnostico</label>
+  <label for="sint">Síntoma/Diagnóstico</label>
   <textarea class="materialize-textarea" type="text" value="" name="sint" cols="3" required></textarea>
   </div>
 
@@ -56,7 +72,7 @@ block content
   </div>
 
   <div class="form-group">
-  <label for="solu">Solucion</label>
+  <label for="solu">Solución</label>
   <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3" required></textarea>
   </div>
   <br>

@@ -7,25 +7,25 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   fabs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.fabVL, '');
   tecs = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.tecVL, '');
-  areas = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.areaVL, '');
-  if(fabs.StatusCode === 401 || tecs.StatusCode === 401 || areas.StatusCode === 401){
+  //areas = api.restAPICall(api.headersWAuth(req.query.st), 'GET', api.url+'/api/core/system/valueslistvalue/flat/valueslist/'+api.ids.areaVL, '');
+  if(fabs.StatusCode === 401 || tecs.StatusCode === 401 /*|| areas.StatusCode === 401*/){
     res.redirect('/logout?st='+req.query.st);
     res.end();
   }
   tecsd = {}
   fabsd = {}
-  areasd = {}
+  //areasd = {}
   fabs.forEach(function(fab){
     fabsd[fab.RequestedObject.Id] = fab.RequestedObject.Name;
   });
   tecs.forEach(function(tec){
     tecsd[tec.RequestedObject.Id] = tec.RequestedObject.Name;
   });
-  areas.forEach(function(area){
+  /*areas.forEach(function(area){
     areasd[area.RequestedObject.Id] = area.RequestedObject.Name;
-  });
+  });*/
 
-  res.render('create', { title: 'Nuevo Registro - Base de Conocimiento', sessionToken: req.query.st, fabsd: fabsd, tecsd: tecsd, areasd: areasd});
+  res.render('create', { title: 'Nuevo Registro - Base de Conocimiento', sessionToken: req.query.st, fabsd: fabsd, tecsd: tecsd, /*areasd: areasd*/});
 });
 
 router.post('/', function(req, res, next) {

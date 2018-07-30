@@ -5,18 +5,25 @@ block content
   <div class="card-content white-text">
   <a class="right white-text" href="javascript:void(0)" id="bt-del"><i class="material-icons">delete</i></a>
   <a class="right white-text" href="javascript:void(0)" id= "bt-edit"><i class="material-icons">edit</i></a>
+  <a class="right white-text" href="javascript:void(0)" id="bt-exp"><i class="material-icons">picture_as_pdf</i></a> 
   <span class="card-title" id="sp-titulo">#{reg.tit}</span>
   <p id="sp-fab">Fabricante: #{reg.fab}</p>
   <p id="sp-tec">Tecnología: #{reg.tec}</p>
   <p id="p-modelo">Modelo: #{reg.mod}</p>
+  <p id="p-version">Versión: #{reg.ver}</p>
+  <p id="p-linkf">Link de la KB del fabricante: <a href="#{reg.linkf}">#{reg.linkf}</a></p>
+  <p id="p-usuario">Usuario Creador: #{reg.usr}</p>
+  
   <div id="buttons">
+   if attsarr
     each att in attsarr
+      <p id="p-adjunto">Adjuntos: #{reg.atta}</p>
       a(class="white-text" href=att.href) <i class="material-icons">file_download</i>
   </div>
   </div>
   <div class="card-tabs">
   <ul class="tabs tabs-transparent">
-  <li class="tab"><a href="#test4">Sintoma</a></li>
+  <li class="tab"><a href="#test4">Síntoma</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   <div class="card-content blue lighten-5">
   <div id="test4"><p id="p-sintoma">#{reg.sint}</p></div>
@@ -32,7 +39,7 @@ block content
   </div>
   <div class="card-tabs">
   <ul class="tabs tabs-transparent">
-  <li class="tab"><a href="#test6">Solucion</a></li>
+  <li class="tab"><a href="#test6">Solución</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   </div>
   <div class="card-content blue lighten-5">
@@ -51,7 +58,7 @@ block content
   <h3>Editar Registro</h3>
   <div class="form-group">
   <div class="form-group">
-  <label for="titulo">Titulo</label>
+  <label for="titulo">Título</label>
   <input type="text" name="titulo" value="#{reg.tit}" required>
   <input type="hidden" name="st" value=#{sessionToken}>
   <input type="hidden" name="id" value=#{id}>
@@ -77,10 +84,18 @@ block content
   <br>
   </div>
   <div class="form-group">
-  <label for="mod">Modelo/s</label>
+  <label for="mod">Modelo</label>
   <input type="text" value="#{reg.mod}" name="mod">
   </div>
   <div class="form-group">
+  <label for="mod">Versión</label>
+  <input type="text" value="#{reg.ver}" name="ver">
+  </div>
+  <div class="form-group">
+  <label for="linkf">Link KB del Fabricante</label>
+  <input type="text" value="#{reg.linkf}" name="linkf">
+  </div>
+  <!--<div class="form-group">
   <label for="area">Area</label>
   <select class="browser-default" id="area" name="area" value="#{reg.areaid}" required>
   <option  disabled>Seleccione el área</option>
@@ -89,10 +104,10 @@ block content
       option(value=id) #{area}
   </select>
   <br>
-  </div>
+  </div>-->
 
   <div class="form-group">
-  <label for="sint">Sintoma/Diagnostico</label>
+  <label for="sint">Síntoma/Diagnóstico</label>
   <textarea class="materialize-textarea" type="text" name="sint" cols="3">#{reg.sint}</textarea>
   </div>
 
@@ -102,7 +117,7 @@ block content
   </div>
 
   <div class="form-group">
-  <label for="solu">Solucion</label>
+  <label for="solu">Solución</label>
   <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3">#{reg.solu}</textarea>
   </div>
   <br>

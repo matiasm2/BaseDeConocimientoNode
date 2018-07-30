@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
-  $('#f-editReg').hide();
+	$('#bt-exp').click(function (){
+		window.location='/pdf?st='+localStorage.sessionToken+'&id='+getParameterByName('id');
+		}); 
+	$('#f-editReg').hide();
 
 	if (typeof(Storage) !== "undefined") {
 		if (!localStorage.sessionToken) {

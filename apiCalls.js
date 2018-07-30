@@ -58,14 +58,14 @@ module.exports ={
                         "Value" :  reg.titulo,
                          "FieldId":  this.ids.tit
                      },
-                     [String( this.ids.area)]: {
+                     /*[String( this.ids.area)]: {
                          "Type" : 4,
                          "Value" : {
                               "ValuesListIds" : [ reg.area],
                               "OtherText" : null
                             },
                           "FieldId":  this.ids.area
-                      },
+                      },*/
                       [String( this.ids.fab)]: {
                           "Type" : 4,
                           "Value" : {
@@ -92,6 +92,11 @@ module.exports ={
                             "Value" :  reg.sint,
                              "FieldId":  this.ids.sint
                          },
+						  [String( this.ids.linkf)]: {
+                            "Type" : 1,
+                            "Value" :  reg.linkf,
+                             "FieldId":  this.ids.linkf
+                         },
                          [String( this.ids.caus)]: {
                              "Type" : 1,
                              "Value" :  reg.caus,
@@ -101,6 +106,16 @@ module.exports ={
                               "Type" : 1,
                               "Value" :  reg.solu,
                                "FieldId":  this.ids.solu
+                           },
+						   [String( this.ids.ver)]: {
+                              "Type" : 1,
+                              "Value" :  reg.ver,
+                               "FieldId":  this.ids.ver
+                           },
+						   [String( this.ids.usr)]: {
+                              "Type" : 15,
+                              "Value" :  reg.usr,
+                               "FieldId":  this.ids.usr
                            },
                         [String( this.ids.att)]: {
                             "Type" : 11,
@@ -217,14 +232,17 @@ module.exports ={
       "fab": 22523,
       "tec": 22520,
       "mod": 22528,
-      "area": 22524,
+      //"area": 22524,
+	  "linkf":24316,
+	  "ver": 24310,
+      "usr": 22529,
       "sint": 22521,
       "caus": 22525,
       "solu": 22526,
       "att": 22527,
       "fabVL": 2682,
       "tecVL": 2681,
-      "areaVL": 5886
+      //"areaVL": 5886
     }
 
 }
