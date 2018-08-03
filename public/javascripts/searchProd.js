@@ -167,14 +167,20 @@ function createSearchOptionsHora(txticket){
 }
 
 function createRecordRow(record){
+
+	sint = $("<div />").html(record.children[1].innerHTML).text();
+	if(sint.includes('<p>')){
+		sint = "Ver en el registro";
+	}
+	
 	html = ['<tr>',
 			  '<td><a href="register?st='+localStorage.sessionToken+'&id='+record.getAttribute('contentId')+'">'+record.children[0].innerHTML+'</a></td>',
-			  '<td>'+record.children[1].innerHTML+'</td>',
-			  '<td>'+record.children[3].innerHTML+'</td>',
-			  '<td>'+record.children[4].innerHTML+'</td>',
-			  '<td>'+record.children[5].innerHTML+'</td>',
-			  '<td>'+record.children[6].innerHTML+'</td>',
-			  '<td>'+record.children[7].childNodes[0].firstChild.attributes[1].nodeValue + " " + record.children[7].childNodes[0].firstChild.attributes[2].nodeValue + '</td>',
+			  '<td><div>'+sint+'</div></td>',
+			  '<td><div>'+record.children[3].innerHTML+'</div></td>',
+			  '<td><div>'+record.children[4].innerHTML+'</div></td>',
+			  '<td><div>'+record.children[5].innerHTML+'</div></td>',
+			  '<td><div>'+record.children[6].innerHTML+'</div></td>',
+			  '<td><div>'+record.children[7].childNodes[0].firstChild.attributes[1].nodeValue + " " + record.children[7].childNodes[0].firstChild.attributes[2].nodeValue + '</div></td>',
 		'</tr>'
 	];
     console.log(record);

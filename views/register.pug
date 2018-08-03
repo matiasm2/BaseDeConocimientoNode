@@ -95,40 +95,39 @@ block content
   <label for="linkf">Link KB del Fabricante</label>
   <input type="text" value="#{reg.linkf}" name="linkf">
   </div>
-  <!--<div class="form-group">
-  <label for="area">Area</label>
-  <select class="browser-default" id="area" name="area" value="#{reg.areaid}" required>
-  <option  disabled>Seleccione el área</option>
-  if areasd
-    each area, id  in areasd
-      option(value=id) #{area}
-  </select>
-  <br>
-  </div>-->
 
   <div class="form-group">
-  <label for="sint">Síntoma/Diagnóstico</label>
-  <textarea class="materialize-textarea" type="text" name="sint" cols="3">#{reg.sint}</textarea>
+  <label for="sint"><strong>Síntoma/Diagnóstico</strong></label>
+    <input name="sint" id="sint" type="hidden">
+    <div id="editorSint">
+    </div>
   </div>
 
+  <br>
   <div class="form-group">
   <label for="caus">Causa</label>
-  <textarea class="materialize-textarea" type="text" value="" name="caus" cols="3">#{reg.caus}</textarea>
+    <input name="caus" id="caus" type="hidden">
+    <div id="editorCaus">
+    </div>
   </div>
-
+  <br>
   <div class="form-group">
-  <label for="solu">Solución</label>
-  <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3">#{reg.solu}</textarea>
+    <label for="solu">Solucion</label>
+    <input type="hidden" name="solu" id="solu">
+    <div id="editorSolu">
+    </div>
   </div>
   <br>
 
   <button type="submit" class="light-blue darken-4 waves-effect waves-light btn" name="button" id="bt-editar" >Guardar Cambios</button> <button type="button" class="light-blue darken-4 waves-effect waves-light btn" name="button" id="bt-cancelar" >Cancelar</button>
   </div>
+  <br>
 
   </form>
 
 block script
   script(src='/javascripts/register.js')
+  script(src='/javascripts/tinymce/tinymce.min.js')
   if reg
     script(type='text/javascript').
       $('#tec').val(#{reg.tecid});
@@ -145,3 +144,56 @@ block script
         var id = #{id};
         Materialize.toast('#{msg}', 3000, 'rounded',function(){
           if (id)window.location= "/register?st=#{sessionToken}&id=#{id}"});
+          
+  script(type='text/javascript').
+    tinymce.init({
+      selector: '#editorSint',
+      plugins: "textcolor colorpicker",
+      setup: function (editor) {
+        editor.on('init', function (e) {
+          sint = $("<div />").html('#{reg.sint}').text();
+          this.setContent(sint);
+          $('#sint')[0].value = this.getBody().innerHTML;
+        });
+      },
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          $('#sint')[0].value = this.getBody().innerHTML;
+        });
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+    });
+    tinymce.init({
+      selector: '#editorCaus',
+      plugins: "textcolor colorpicker",
+      setup: function (editor) {
+        editor.on('init', function (e) {
+          caus = $("<div />").html('#{reg.caus}').text();
+          this.setContent(caus);
+          $('#caus')[0].value = this.getBody().innerHTML;
+        });
+      },
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          $('#caus')[0].value = this.getBody().innerHTML;
+        });
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+    });
+    tinymce.init({
+      selector: '#editorSolu',
+      plugins: "textcolor colorpicker",
+      setup: function (editor) {
+        editor.on('init', function (e) {
+          solu = $("<div />").html('#{reg.solu}').text();
+          this.setContent(solu);
+          $('#solu')[0].value = this.getBody().innerHTML;
+        });
+      },
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          $('#solu')[0].value = this.getBody().innerHTML;
+        });
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+    });

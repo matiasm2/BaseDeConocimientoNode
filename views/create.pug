@@ -71,17 +71,19 @@ block content
   <br>
   <div class="file-field input-field">
   <div class="light-blue darken-4 waves-effect waves-light btn">
-  <span>Adjuntos</span>
-  <input type="file" name="files" id="files" multiple accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/pdf, image/png, application/msword, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/csv, text/plain, image/jpeg, image/gif" >
+  <span>Adjunto</span>
+  <input type="file" name="files" id="files" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/pdf, image/png, application/msword, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/csv, text/plain, image/jpeg, image/gif" >
   </div>
   <div class="file-path-wrapper">
-  <input class="file-path validate" type="text" placeholder="Upload one or more files" id="txt" >
+  <input class="file-path validate" type="text" placeholder="Carga tu adjunto aca" id="txt" >
   <input type="hidden" name="att" id="att" >
   </div>
   <a class="waves-effect waves-teal btn-flat" id="btn-delfile"><i class="material-icons left">delete</i></a>
   </div>
 
   <button type="submit" class="light-blue darken-4 waves-effect waves-light btn" >Crear registro</button>
+  <br>
+  <br>
   </div>
 
   </form>
@@ -96,41 +98,51 @@ block script
             window.location= "/register?st=#{sessionToken}&id=#{id}"});
   
   script(src='/javascripts/create.js')
-  script(src='/javascripts/summernote-lite.js')
   script(src='/javascripts/tinymce/tinymce.min.js')
 
   script(type='text/javascript').
     tinymce.init({
       selector: '#editorSint',
+      plugins: "textcolor colorpicker",
       init_instance_callback: function (editor) {
         editor.on('Change', function (e) {
           console.log('Editor contents was changed.');
           //console.log(e);
-          console.log(this);
-          $('#sint')[0].value = $('#editorSint_ifr').innerHTML;
+          //console.log(this);
+          //console.log(this.getBody());
+          $('#sint')[0].value = this.getBody().innerHTML;
         });
-      }
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
-    /*$('#editorCaus').summernote();
-    $('#editorSolu').summernote();
-    $('#editorSint').summernote({
-      callbacks: {
-        onPaste: function(e) {
-          console.log(e.originalEvent.srcElement.innerHTML);
-          if (e.originalEvent.srcElement.innerHTML.includes('colgroup') || e.originalEvent.srcElement.innerHTML.includes('table')){
-            var node = document.createElement('div');
-            node.innerHTML=e.originalEvent.srcElement.innerHTML;
-            $('.note-editable')[0].innerHTML.replace(e.originalEvent.srcElement.innerHTML,'');
-            $('#editorSint').summernote('insertNode', node);
-            console.log($('.note-editable')[0]);
-            console.log($('#sint')[0].value);
-          }
-        },
-        onChange: function(contents, $editable) {
-          $('#sint')[0].value = $('.note-editable')[0].innerHTML;
-        }
-      }
-    });*/
+    tinymce.init({
+      selector: '#editorCaus',
+      plugins: "textcolor colorpicker",
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          console.log('Editor contents was changed.');
+          //console.log(e);
+          //console.log(this);
+          //console.log(this.getBody());
+          $('#caus')[0].value = this.getBody().innerHTML;
+        });
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+    });
+    tinymce.init({
+      selector: '#editorSolu',
+      plugins: "textcolor colorpicker",
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          console.log('Editor contents was changed.');
+          //console.log(e);
+          //console.log(this);
+          //console.log(this.getBody());
+          $('#solu')[0].value = this.getBody().innerHTML;
+        });
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+    });
 
 
     
