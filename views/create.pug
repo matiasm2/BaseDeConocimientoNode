@@ -7,7 +7,7 @@ block content
   <div class="form-group">
   <div class="form-group">
   <label for="titulo">Título</label>
-  <input type="text" name="titulo" value="">
+  <input type="text" name="titulo" value="" required>
   <input type="hidden" name="st" value=#{sessionToken}>
   </div>
   <div class="form-group">
@@ -33,47 +33,40 @@ block content
   
   <div class="form-group">
   <label for="mod">Modelo</label>
-  <input type="text" value="" name="mod" required>
+  <input type="text" value="" name="mod">
   </div>
   
   <div class="form-group">
   <label for="ver">Versión</label>
-  <input type="text" value="" name="ver" required>
+  <input type="text" value="" name="ver">
   </div>
   
   
   <div class="form-group">
   <label for="linkf">Link de la KB del Fabricante</label>
-  <input type="text" value="" name="linkf" required>
+  <input type="text" value="" name="linkf">
   </div>
-  <!--<div class="form-group">
-  <label for="mod">Usuario</label>
-  <input type="text" value="" name="mod" required>
-  </div>-->
-  <!--<div class="form-group">
-  <label for="area">Area</label>
-  <select class="browser-default" id="area" name="area" required>
-  <option value="" disabled selected>Seleccione el área</option>
-  if areasd
-    each area, id  in areasd
-      option(value=id) #{area}
-  </select>
-  <br>
-  </div>-->
 
   <div class="form-group">
-  <label for="sint">Síntoma/Diagnóstico</label>
-  <textarea class="materialize-textarea" type="text" value="" name="sint" cols="3" required></textarea>
+  <label for="sint"><strong>Síntoma/Diagnóstico</strong></label>
+    <input name="sint" id="sint" type="hidden">
+    <div id="editorSint">
+    </div>
   </div>
 
+  <br>
   <div class="form-group">
   <label for="caus">Causa</label>
-  <textarea class="materialize-textarea" type="text" value="" name="caus" cols="3" required></textarea>
+    <input name="caus" id="caus" type="hidden">
+    <div id="editorCaus">
+    </div>
   </div>
-
+  <br>
   <div class="form-group">
-  <label for="solu">Solución</label>
-  <textarea class="materialize-textarea" type="text" value="" name="solu" cols="3" required></textarea>
+    <label for="solu">Solucion</label>
+    <input type="hidden" name="solu" id="solu">
+    <div id="editorSolu">
+    </div>
   </div>
   <br>
   <div class="file-field input-field">
@@ -103,4 +96,42 @@ block script
             window.location= "/register?st=#{sessionToken}&id=#{id}"});
   
   script(src='/javascripts/create.js')
+  script(src='/javascripts/summernote-lite.js')
+  script(src='/javascripts/tinymce/tinymce.min.js')
+
+  script(type='text/javascript').
+    tinymce.init({
+      selector: '#editorSint',
+      init_instance_callback: function (editor) {
+        editor.on('Change', function (e) {
+          console.log('Editor contents was changed.');
+          //console.log(e);
+          console.log(this);
+          $('#sint')[0].value = $('#editorSint_ifr').innerHTML;
+        });
+      }
+    });
+    /*$('#editorCaus').summernote();
+    $('#editorSolu').summernote();
+    $('#editorSint').summernote({
+      callbacks: {
+        onPaste: function(e) {
+          console.log(e.originalEvent.srcElement.innerHTML);
+          if (e.originalEvent.srcElement.innerHTML.includes('colgroup') || e.originalEvent.srcElement.innerHTML.includes('table')){
+            var node = document.createElement('div');
+            node.innerHTML=e.originalEvent.srcElement.innerHTML;
+            $('.note-editable')[0].innerHTML.replace(e.originalEvent.srcElement.innerHTML,'');
+            $('#editorSint').summernote('insertNode', node);
+            console.log($('.note-editable')[0]);
+            console.log($('#sint')[0].value);
+          }
+        },
+        onChange: function(contents, $editable) {
+          $('#sint')[0].value = $('.note-editable')[0].innerHTML;
+        }
+      }
+    });*/
+
+
+    
   
