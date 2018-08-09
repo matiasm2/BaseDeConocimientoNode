@@ -81,54 +81,50 @@ function createSearchOptionsHora(txticket){
 	}
 	if(txticket != ''){
 		txtt = '<TextFilterCondition>'+
-						  '<Operator>Contains</Operator>'+
-						  '<Field name="Titulo">22517</Field>'+
-						  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Sintoma">22521</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Causa">22525</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Modelos">22528</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Version">24310</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Usuario_Creador">22529</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>'+
-						'<TextFilterCondition>'+
-							  '<Operator>Contains</Operator>'+
-							  '<Field name="Solucion">22526</Field>'+
-							  '<Value>'+txticket+'</Value>'+
-						'</TextFilterCondition>';
+						'<Operator>Contains</Operator>'+
+						'<Field name="Titulo">22517</Field>'+
+						'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>'+
+				'<TextFilterCondition>'+
+				    	'<Operator>Contains</Operator>'+
+					  	'<Field name="Sintoma">22521</Field>'+
+					  	'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>'+
+				'<TextFilterCondition>'+
+						'<Operator>Contains</Operator>'+
+						'<Field name="Causa">22525</Field>'+
+						'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>'+
+				'<TextFilterCondition>'+
+						'<Operator>Contains</Operator>'+
+						'<Field name="Modelos">22528</Field>'+
+						'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>'+
+				'<TextFilterCondition>'+
+						'<Operator>Contains</Operator>'+
+						'<Field name="Version">24310</Field>'+
+						'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>'+
+				'<TextFilterCondition>'+
+						'<Operator>Contains</Operator>'+
+						'<Field name="Solucion">22526</Field>'+
+						'<Value>'+txticket+'</Value>'+
+				'</TextFilterCondition>';
 
-			operatorLogic = '<OperatorLogic>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7</OperatorLogic>';
+			operatorLogic = '<OperatorLogic>1 OR 2 OR 3 OR 4 OR 5 OR 6</OperatorLogic>';
 
 	}
 
 	if(txticket != '' && $('#check')[0].checked && $('#check2')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8 AND 9</OperatorLogic>';
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6) AND 7 AND 8</OperatorLogic>';
 	}
 
 	else if (txticket != '' && $('#check')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8</OperatorLogic>';
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6) AND 7</OperatorLogic>';
 	}
 	else if (txticket != '' && $('#check2')[0].checked){
-		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7) AND 8</OperatorLogic>';
+
+		operatorLogic = '<OperatorLogic>(1 OR 2 OR 3 OR 4 OR 5 OR 6) AND 7</OperatorLogic>';
 	}
 	else if ($('#check')[0].checked && $('#check2')[0].checked){
 		operatorLogic = '<OperatorLogic>1 AND 2</OperatorLogic>';
