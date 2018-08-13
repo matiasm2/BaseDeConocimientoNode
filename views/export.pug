@@ -3,36 +3,36 @@ extends layoutExp
 block content
   <div id= "c-detalle" class="card light-blue darken-4">
   <div class="card-content white-text">
-  <span class="card-title" id="sp-titulo">#{reg.tit}</span>
-  <p id="sp-fab">Fabricante: #{reg.fab}</p>
-  <p id="sp-tec">Tecnología: #{reg.tec}</p>
-  <p id="p-modelo">Modelo: #{reg.mod}</p>
-  <p id="p-modelo">Versión: #{reg.ver}</p>
-  <!--<p id="p-modelo">Usuario Creador: #{reg.usr}</p>-->
+  <span class="card-title" id="sp-titulo">!{reg.tit}</span>
+  <p id="sp-fab">Fabricante: !{reg.fab}</p>
+  <p id="sp-tec">Tecnología: !{reg.tec}</p>
+  <p id="p-modelo">Modelo: !{reg.mod}</p>
+  <p id="p-modelo">Versión: !{reg.ver}</p>
+  <!--<p id="p-modelo">Usuario Creador: !{reg.usr}</p>-->
   </div>
   <div class="card-tabs">
   <ul class="tabs tabs-transparent">
-  <li class="tab"><a href="#test4">Sintoma</a></li>
+  <li class="tab"><a >Sintoma</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   <div class="card-content blue lighten-5">
-  <div id="test4"><p id="p-sintoma">#{reg.sint}</p></div>
-  </div>
-  </div>
-  <div class="card-tabs">
-  <ul class="tabs tabs-transparent">
-  <li class="tab"><a href="#test5">Causa</a></li>
-  <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
-  <div class="card-content blue lighten-5">
-  <div id="test5"><p id="p-causa">#{reg.caus}</p></div>
+  <div id="test4"><div id="p-sintoma">!{reg.sint}</div></div>
   </div>
   </div>
   <div class="card-tabs">
   <ul class="tabs tabs-transparent">
-  <li class="tab"><a href="#test6">Solucion</a></li>
+  <li class="tab"><a>Causa</a></li>
+  <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
+  <div class="card-content blue lighten-5">
+  <div id="test5"><div id="p-causa">!{reg.caus}</div></div>
+  </div>
+  </div>
+  <div class="card-tabs">
+  <ul class="tabs tabs-transparent">
+  <li class="tab"><a>Solucion</a></li>
   <li class="indicator" style="right: 0px; left: 238px;"></li></ul>
   </div>
   <div class="card-content blue lighten-5">
-  <div id="test6"><p id="p-solucion">#{reg.solu}</p></div>
+  <div id="test6"><div id="p-solucion">!{reg.solu}</div></div>
   </div>
   
   <div class="card-content blue lighten-5">
@@ -43,6 +43,7 @@ block content
 
 block script
   if reg
+    script(src='/javascripts/export.js')
     script(type='text/javascript').
       $('#tec').val(#{reg.tecid});
       $('#fab').val(#{reg.fabid});

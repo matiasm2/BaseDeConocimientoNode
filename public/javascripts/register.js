@@ -1,8 +1,19 @@
 $(document).ready(function() {
+	$('#test4')[0].innerHTML=$('#test4')[0].innerHTML.replace(new RegExp('http://basedeconocimiento/', 'g'),'data:image/png;base64,').replace(new RegExp('<img ', 'g'),'<img class="responsive-img"');
+	$('#test5')[0].innerHTML=$('#test5')[0].innerHTML.replace(new RegExp('http://basedeconocimiento/', 'g'),'data:image/png;base64,').replace(new RegExp('<img ', 'g'),'<img class="responsive-img"');
+	$('#test6')[0].innerHTML=$('#test6')[0].innerHTML.replace(new RegExp('http://basedeconocimiento/', 'g'),'data:image/png;base64,').replace(new RegExp('<img ', 'g'),'<img class="responsive-img"');
+	
+	$('#f-editReg').submit(function(event){
+		var form = $(this);
+		form[0].querySelector('#sint').value = form[0].querySelector('#sint').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+		form[0].querySelector('#caus').value = form[0].querySelector('#caus').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+		form[0].querySelector('#solu').value = form[0].querySelector('#solu').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+		console.log(form);
+	});
 
 	$('#bt-exp').click(function (){
-		window.location='/pdf?st='+localStorage.sessionToken+'&id='+getParameterByName('id');
-		}); 
+		window.location = '/export?st='+localStorage.sessionToken+'&id='+getParameterByName('id');
+	}); 
 	$('#f-editReg').hide();
 
 	if (typeof(Storage) !== "undefined") {
@@ -46,6 +57,8 @@ $(document).ready(function() {
 	$('#bt-search').click(function (){
 		window.location='/search';
 	});
+
+
 });
 
 function getParameterByName(name) {

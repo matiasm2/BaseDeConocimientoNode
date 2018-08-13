@@ -35,125 +35,8 @@ router.post('/', function(req, res, next) {
     req.body.attSint = [];
     req.body.attCaus = [];
     req.body.attSolu = [];
-    firstvariable = 'data:image/png;base64,';
-    secondvariable = '="';
-
-    //Busqueda de imagenes incrustadas en el Sintoma
-    if (req.body.sint.includes('base64,')){
-      array = req.body.sint.split(firstvariable);
-      array.forEach(function(line){
-        if(array.indexOf(line)!=0){
-          //console.log(array.indexOf(line));
-          //console.log(line.split(secondvariable)[0]+'\n\n\n\n');
-          d = date.getTime();
-          attBody = api.getAttachmentBody(d+'.png', line.split(secondvariable)[0]+'==');
-          console.log(attBody);
-          options = {
-              "url": api.url+'/api/core/content/attachment',
-              "method": "POST",
-              "headers": api.headersWAuth(req.body.st),
-              "rejectUnauthorized": false,
-              "body": JSON.stringify(attBody)
-          }
-          console.log(options);
-          request(options, function(error, response, body){
-            if (!error && response.statusCode == 200) {
-              var info = JSON.parse(body);
-              console.log(info);
-              if (info.IsSuccessful){
-                if (req.body.attSint){
-                  req.body.attSint.push(info.RequestedObject.Id);
-                } else {
-                  req.body.attSint = [info.RequestedObject.Id];
-                }
-                req.body.sint.replace(firstvariable+line.split(secondvariable)+secondvariable, 'ATT-'+info.RequestedObject.Id)
-              } else {
-                console.log(info);
-              }
-            }
-          });
-        }
-      });
-    }
-
-    //Busqueda de imagenes incrustadas en la Causa
-    if (req.body.caus.includes('base64,')){
-      array = req.body.caus.split(firstvariable);
-      array.forEach(function(line){
-        if(array.indexOf(line)!=0){
-          //console.log(array.indexOf(line));
-          //console.log(line.split(secondvariable)[0]+'\n\n\n\n');
-          d = date.getTime();
-          attBody = api.getAttachmentBody(d+'.png', line.split(secondvariable)[0]+'==');
-          console.log(attBody);
-          options = {
-              "url": api.url+'/api/core/content/attachment',
-              "method": "POST",
-              "headers": api.headersWAuth(req.body.st),
-              "rejectUnauthorized": false,
-              "body": JSON.stringify(attBody)
-          }
-          console.log(options);
-          request(options, function(error, response, body){
-            if (!error && response.statusCode == 200) {
-              var info = JSON.parse(body);
-              console.log(info);
-              if (info.IsSuccessful){
-                if (req.body.attCaus){
-                  req.body.attCaus.push(info.RequestedObject.Id);
-                } else {
-                  req.body.attCaus = [info.RequestedObject.Id];
-                }
-                req.body.sint.replace(firstvariable+line.split(secondvariable)+secondvariable, 'ATT-'+info.RequestedObject.Id)
-              } else {
-                console.log(info);
-              }
-            }
-          });
-        }
-      });
-    }
-
-    //Busqueda de imagenes incrustadas en la Solucion
-    if (req.body.solu.includes('base64,')){
-      array = req.body.solu.split(firstvariable);
-      array.forEach(function(line){
-        if(array.indexOf(line)!=0){
-          //console.log(array.indexOf(line));
-          //console.log(line.split(secondvariable)[0]+'\n\n\n\n');
-          d = date.getTime();
-          attBody = api.getAttachmentBody(d+'.png', line.split(secondvariable)[0]+'==');
-          console.log(attBody);
-          options = {
-              "url": api.url+'/api/core/content/attachment',
-              "method": "POST",
-              "headers": api.headersWAuth(req.body.st),
-              "rejectUnauthorized": false,
-              "body": JSON.stringify(attBody)
-          }
-          console.log(options);
-          request(options, function(error, response, body){
-            if (!error && response.statusCode == 200) {
-              var info = JSON.parse(body);
-              if (info.IsSuccessful){
-                if (req.body.attSolu){
-                  req.body.attSolu.push(info.RequestedObject.Id);
-                } else {
-                  req.body.attSolu = [info.RequestedObject.Id];
-                }
-                req.body.sint.replace(firstvariable+line.split(secondvariable)+secondvariable, 'ATT-'+info.RequestedObject.Id)
-              } else {
-                console.log(info);
-              }
-            }
-          });
-        }
-
-      });
-    }
 
     body = api.getContentBody(req.body, '');
-    //console.log(req.body);
 
     options = {
         "url": api.url+'/api/core/content',
@@ -163,9 +46,7 @@ router.post('/', function(req, res, next) {
         "body": JSON.stringify(body)
     }
 
-    console.log(options);
 
-    //console.log(options);
 
     var reque = request(options, function(error, response, body){
       if (!error && response.statusCode == 200) {
