@@ -148,7 +148,7 @@ block script
   script(type='text/javascript').
     tinymce.init({
       selector: '#editorSint',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
           st = `#{reg.sint}`;
@@ -166,11 +166,11 @@ block script
       images_dataimg_filter: function(img) {
         return img.hasAttribute('internal-blob');
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorCaus',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
           st = `#{reg.caus}`;
@@ -188,11 +188,11 @@ block script
       images_dataimg_filter: function(img) {
         return img.hasAttribute('internal-blob');
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorSolu',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
           st = `#{reg.solu}`;
@@ -210,5 +210,5 @@ block script
       images_dataimg_filter: function(img) {
         return img.hasAttribute('internal-blob');
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
