@@ -5,6 +5,7 @@ html
     link(rel='stylesheet', href='/stylesheets/materialize.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+
   body
     <header>
     <nav>
@@ -14,11 +15,11 @@ html
       <a href="/"><img class="responsive-img brand-logo " src="images/logo.png" style="width:auto;height:95%"/></a>
     </header> 
   
-  <main>
-  div(class="container")
+    <main>
+    div(class="container")
       block content
   
-  </main>
+    </main>
 	
 
 		
@@ -39,4 +40,4 @@ html
         localStorage.sessionToken = ''
     script(src='/javascripts/jquery-3.3.1.min.js')
     script(src='/javascripts/materialize.min.js')
-    block script
+  block script

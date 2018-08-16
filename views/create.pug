@@ -49,7 +49,7 @@ block content
 
   <div class="form-group">
   <label for="sint"><strong>Síntoma/Diagnóstico</strong></label>
-    <input name="sint" id="sint" type="hidden">
+    <input name="sint" id="sint" type="hidden" required>
     <div id="editorSint">
     </div>
   </div>
@@ -81,7 +81,7 @@ block content
   <a class="waves-effect waves-teal btn-flat" id="btn-delfile"><i class="material-icons left">delete</i></a>
   </div>
 
-  <button type="submit" class="light-blue darken-4 waves-effect waves-light btn" >Crear registro</button>
+  <button type="submit" class="light-blue darken-4 waves-effect waves-light btn" id="btbSubmit" >Crear registro</button>
   <br>
   <br>
   </div>
@@ -93,7 +93,7 @@ block script
   if msg
       script(type='text/javascript').
         var id = #{id};
-        Materialize.toast('#{msg}', 3000, 'rounded',function(){
+        Materialize.toast('#{msg}', 1500, 'rounded',function(){
           if (id)
             window.location= "/register?st=#{sessionToken}&id=#{id}"});
   
@@ -103,45 +103,33 @@ block script
   script(type='text/javascript').
     tinymce.init({
       selector: '#editorSint',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       init_instance_callback: function (editor) {
         editor.on('Change', function (e) {
-          console.log('Editor contents was changed.');
-          //console.log(e);
-          //console.log(this);
-          //console.log(this.getBody());
           $('#sint')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorCaus',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       init_instance_callback: function (editor) {
         editor.on('Change', function (e) {
-          console.log('Editor contents was changed.');
-          //console.log(e);
-          //console.log(this);
-          //console.log(this.getBody());
           $('#caus')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorSolu',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       init_instance_callback: function (editor) {
         editor.on('Change', function (e) {
-          console.log('Editor contents was changed.');
-          //console.log(e);
-          //console.log(this);
-          //console.log(this.getBody());
           $('#solu')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
 
 

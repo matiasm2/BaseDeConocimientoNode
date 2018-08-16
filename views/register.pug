@@ -142,16 +142,18 @@ block script
   if msg
       script(type='text/javascript').
         var id = #{id};
-        Materialize.toast('#{msg}', 3000, 'rounded',function(){
+        Materialize.toast('#{msg}', 1500, 'rounded',function(){
           if (id)window.location= "/register?st=#{sessionToken}&id=#{id}"});
           
   script(type='text/javascript').
     tinymce.init({
       selector: '#editorSint',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
-          sint = $("<div />").html('#{reg.sint}').text();
+          st = `#{reg.sint}`;
+          st = st.replace('http://basedeconocimiento/','data:image/png;base64,');
+          sint = $("<div />").html(st).text();
           this.setContent(sint);
           $('#sint')[0].value = this.getBody().innerHTML;
         });
@@ -161,14 +163,19 @@ block script
           $('#sint')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      images_dataimg_filter: function(img) {
+        return img.hasAttribute('internal-blob');
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorCaus',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
-          caus = $("<div />").html('#{reg.caus}').text();
+          st = `#{reg.caus}`;
+          st = st.replace('http://basedeconocimiento/','data:image/png;base64,');
+          caus = $("<div />").html(st).text();
           this.setContent(caus);
           $('#caus')[0].value = this.getBody().innerHTML;
         });
@@ -178,14 +185,19 @@ block script
           $('#caus')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      images_dataimg_filter: function(img) {
+        return img.hasAttribute('internal-blob');
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });
     tinymce.init({
       selector: '#editorSolu',
-      plugins: "textcolor colorpicker",
+      plugins: "textcolor colorpicker lists",
       setup: function (editor) {
         editor.on('init', function (e) {
-          solu = $("<div />").html('#{reg.solu}').text();
+          st = `#{reg.solu}`;
+          st = st.replace('http://basedeconocimiento/','data:image/png;base64,');
+          solu = $("<div />").html(st).text();
           this.setContent(solu);
           $('#solu')[0].value = this.getBody().innerHTML;
         });
@@ -195,5 +207,8 @@ block script
           $('#solu')[0].value = this.getBody().innerHTML;
         });
       },
-      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, fontsizeselect, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
+      images_dataimg_filter: function(img) {
+        return img.hasAttribute('internal-blob');
+      },
+      toolbar: "bold, italic, underline, strikethrough, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, fontsizeselect, outdent, indent, blockquote, undo, redo, removeformat, subscript, superscript, forecolor backcolor"
     });

@@ -5,6 +5,12 @@ $(document).ready(function() {
 		"filesBytes": []
 	}
 	$('#att').val(JSON.stringify(filesJSON));
+	$('#f-hora').submit(function(event){
+		var form = $(this);
+		form[0].querySelector('#sint').value = form[0].querySelector('#sint').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+		form[0].querySelector('#caus').value = form[0].querySelector('#caus').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+		form[0].querySelector('#solu').value = form[0].querySelector('#solu').value.replace(new RegExp('data:image/png;base64,', 'g'),'http://basedeconocimiento/');
+	});
 
 
 

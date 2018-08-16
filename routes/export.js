@@ -1,7 +1,5 @@
 var express = require('express');
 var api = require('../apiCalls');
-var fs = require('fs');
-var wkhtmltopdf = require('wkhtmltopdf');
 var router = express.Router();
 
 /* GET home page. */
@@ -42,17 +40,6 @@ router.get('/', function(req, res, next) {
       reg['tecid'] = tec.RequestedObject.Id;
     }
   });
-  var atts = content.RequestedObject.FieldContents[api.ids.att].Value;
-  attsarr = [];
-  if (atts){
-    atts.forEach(function(i){
-        var a = {"href": 'attachment?st='+req.query.st+'&id='+i};
-        attsarr.push(a);
-
-    });
-    res.render('export', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: '', reg: reg, attsarr: attsarr});
-    res.end();
-  }
   res.render('export', { title: 'Registro - Base de Conocimiento', sessionToken: req.query.st, id: req.query.id, fabsd: fabsd, tecsd: tecsd, areasd: '0', reg: reg});
   res.end();
 });
