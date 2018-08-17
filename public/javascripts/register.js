@@ -12,7 +12,7 @@ $(document).ready(function() {
 	});
 
 	$('#bt-exp').click(function (){
-		window.location = '/export?st='+localStorage.sessionToken+'&id='+getParameterByName('id');
+		window.location = '/pdf?st='+localStorage.sessionToken+'&id='+getParameterByName('id');
 	}); 
 	$('#f-editReg').hide();
 

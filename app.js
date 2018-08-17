@@ -17,7 +17,7 @@ var register = require('./routes/register');
 var search = require('./routes/search');
 var index = require('./routes/index');
 var exp = require('./routes/export');
-//var pdf = require('./routes/pdf');
+var pdf = require('./routes/pdf');
 
 
 var app = express();
@@ -44,7 +44,7 @@ app.use('/logout', logout);
 app.use('/register', register);
 app.use('/search', search);
 app.use('/index', index);
-//app.use('/pdf', pdf);
+app.use('/pdf', pdf);
 app.use('/export', exp);
 
 // catch 404 and forward to error handler
